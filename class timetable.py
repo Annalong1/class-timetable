@@ -1,13 +1,14 @@
 ##
 #class timetable
 
+#functions
 def create_timetable():
     """combining lists to make timetable"""
     periods = [1, 2, 3, 4, 5]
 
     subjects = [["maths", "english", "CSP", "art", "science"], 
                 ["science", "english", "biology", "CSP", "maths"], 
-                ["english", "CS", "chemestry", "maths", "biology"],
+                ["english", "CS", "chemistry", "maths", "biology"],
                ["englihs", "art", "PE", "walking", "maths"],
                ["physics", "chemstiry", "biology", "maths", "CSP"]]
 
@@ -24,8 +25,21 @@ def create_timetable():
  
     return monday, tuesday, wednesday, thursday, friday, periods
 
+def force_number(message):
+    """force number function"""
+    while True:
+        try:
+            number = int(input(message))
+            return number
+
+        except ValueError:
+            print("Please enter a number")
+            
 #main
 if __name__ == "__main__":
+
+    period = 0
+    
     #defining timetable for each day using create timetable function
     monday, tuesday, wednesday, thursday, friday, periods = create_timetable()
 
@@ -38,19 +52,14 @@ if __name__ == "__main__":
             print("That is not a vaild day")
 
     #force valid period
-    while True:
-        try:
-            period = int(input("What period in number? "))
-            if period <= len(periods):
-                break
-
-            else:
-                print("That is not a valid period")
-
-        except ValueError:
-            print("Enter the period as a number")
-
-
+    vaild = None
+    while vaild is None:
+        
+        period = force_number("Enter the period: ")
+        vaild = monday.get(period)
+        
+        if vaild is None:
+            print("Enter a vaild period")
 
     #printing appropriate statement
     if day == "monday":
